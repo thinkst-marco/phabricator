@@ -178,7 +178,7 @@ JX.behavior('lightbox-attachments', function() {
       download_icon);
 
     var edit_icon = new JX.PHUIXIconView()
-      .setIcon('fa-edit phui-icon-circle-icon')
+      .setIcon('fa-sitemap phui-icon-circle-icon')
       .getNode();
 
 
@@ -189,6 +189,20 @@ JX.behavior('lightbox-attachments', function() {
         href: '/phlowcharts/edit/'+target_data.monogram+'?return='+window.location.pathname
       },
       edit_icon);
+
+    var open_phlowchart_icon = new JX.PHUIXIconView()
+      .setIcon('fa-external-link phui-icon-circle-icon')
+      .getNode();
+
+
+    var open_phlowchart_button = JX.$N(
+      'a',
+      {
+        className: 'lightbox-download phui-icon-circle hover-sky',
+        target: '_blank',
+        href: target_data.uri
+      },
+      open_phlowchart_icon);
 
 
     var commentIcon = new JX.PHUIXIconView()
@@ -217,7 +231,7 @@ JX.behavior('lightbox-attachments', function() {
 
     var status_button_list = [statusSpan, closeButton, commentButton, download_button];
     if (target_data.uri.endsWith('.svg')) {
-      status_button_list = status_button_list.concat(edit_button);
+      status_button_list = status_button_list.concat(edit_button, open_phlowchart_button);
     }
     var statusHTML =
       JX.$N('div',

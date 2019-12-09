@@ -44,7 +44,9 @@ final class PhabricatorPhlowchartsEditFrameController
       $format_key = $file->getStorageFormat();
       $format = PhabricatorFileStorageFormat::getFormat($format_key);
       $integrity_hash = $engine->newIntegrityHash($raw_data, $format);
-      $file->setIntegrityHash($integrity_hash)->save();
+      $file->setIntegrityHash($integrity_hash)
+           ->setByteSize(strlen($raw_data))
+           ->saveAndIndex();
 
       $blob = id(new PhabricatorFileStorageBlob())->load($storage_handle);
       $blob->setData($raw_data)->save();

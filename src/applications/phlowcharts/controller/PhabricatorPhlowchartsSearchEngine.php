@@ -109,8 +109,8 @@ final class PhabricatorPhlowchartsSearchEngine
       case 'authored':
         $author_phid = array($this->requireViewer()->getPHID());
         return $query
-          ->setParameter('authorPHIDs', $author_phid)
-          ->setParameter('explicit', true);
+          ->setParameter('authorPHIDs', $author_phid);
+//          ->setParameter('explicit', true);
     }
 
     return parent::buildSavedQueryFromBuiltin($query_key);
