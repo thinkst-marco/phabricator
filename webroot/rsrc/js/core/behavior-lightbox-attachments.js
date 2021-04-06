@@ -177,6 +177,20 @@ JX.behavior('lightbox-attachments', function() {
       },
       download_icon);
 
+    var edit_icon = new JX.PHUIXIconView()
+      .setIcon('fa-edit phui-icon-circle-icon')
+      .getNode();
+
+
+    var edit_button = JX.$N(
+      'a',
+      {
+        className: 'lightbox-edit phui-icon-circle hover-sky',
+        href: '/phlowcharts/edit/'+target_data.monogram+'?return='+window.location.pathname
+      },
+      edit_icon);
+
+
     var commentIcon = new JX.PHUIXIconView()
       .setIcon('fa-comments phui-icon-circle-icon')
       .getNode();
@@ -201,12 +215,16 @@ JX.behavior('lightbox-attachments', function() {
         },
         closeIcon);
 
+    var status_button_list = [statusSpan, closeButton, commentButton, download_button];
+    if (target_data.uri.endsWith('.svg')) {
+      status_button_list = status_button_list.concat(edit_button);
+    }
     var statusHTML =
       JX.$N('div',
         {
           className : 'lightbox-status'
         },
-       [statusSpan, closeButton, commentButton, download_button]
+       status_button_list
       );
     JX.DOM.appendContent(lightbox, statusHTML);
     JX.DOM.listen(closeButton, 'click', null, closeLightBox);

@@ -259,6 +259,15 @@ JX.behavior('phabricator-remarkup-assist', function(config) {
           })
           .start();
         break;
+      case 'fa-edit':
+        new JX.Workflow('/phlowcharts/create/')
+          .setHandler(function(response) {
+            var phlowchart = response.phlowchart;
+            var ref = '\n{F' + phlowchart.id + ', size="full"}\n';
+            JX.TextAreaUtils.setSelectionText(area, ref, false)
+          })
+          .start();
+        break;
       case 'fa-arrows-alt':
         set_pinned_mode(root, false);
         if (edit_mode == 'fullscreen') {

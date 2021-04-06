@@ -41,6 +41,7 @@ final class PhabricatorFileLightboxController
     $timeline = $this->buildTransactionTimeline($file, $transactions);
 
     $comment_form = $this->renderCommentForm($file);
+    $phlowchart_button = $this->renderPhlowChartButton($file);
 
     $info = phutil_tag(
       'div',
@@ -59,12 +60,27 @@ final class PhabricatorFileLightboxController
         $info,
         $timeline,
         $comment_form,
+        $phlowchart_button,
       ));
 
     return id(new AphrontAjaxResponse())
       ->setContent($content);
   }
 
+  private function renderPhlowChartButton(PhabricatorFile $file) {
+    $viewer = $this->getViewer();
+
+    $form = id(new AphrontFormView())
+      ->setUser($viewer)
+      ->addSigil('lightbox-phlowchart-edit')
+      ->addClass('lightbox-phlowchart-edit')
+      ->setWorkflow(true);
+
+    $view = phutil_tag_div('phui-phlowchart-edit', $form);
+
+    return $view;
+
+  }
   private function renderCommentForm(PhabricatorFile $file) {
     $viewer = $this->getViewer();
 

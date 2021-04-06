@@ -116,7 +116,7 @@
   padding: 0 12px;
 }
 
-.lightbox-attachment .lightbox-status .lightbox-download {
+.lightbox-attachment .lightbox-status .lightbox-download .lightbox-edit {
   float: right;
 }
 
@@ -134,11 +134,12 @@
   display: block;
 }
 
-.lightbox-attachment .lightbox-status .lightbox-download
+.lightbox-attachment .lightbox-status .lightbox-download .lightbox-edit
   .lightbox-download-form {
     display: inline;
 }
 
+.lightbox-attachment a.lightbox-edit,
 .lightbox-attachment a.lightbox-download,
 .lightbox-attachment a.lightbox-comment,
 .lightbox-attachment a.lightbox-close {

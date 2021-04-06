@@ -57,7 +57,14 @@ final class PhabricatorFileDataController extends PhabricatorFileController {
     }
 
     $response = new AphrontFileResponse();
-    $response->setCacheDurationInSeconds(60 * 60 * 24 * 30);
+    $fname = $file->getName();
+    $is_svg = substr( $fname, strlen( $fname ) - 4) === '.svg';
+    if ($is_svg){
+      $response->setCacheDurationInSeconds(60);
+    } else {
+      $response->setCacheDurationInSeconds(60 * 60 * 24 * 30);
+    }
+    
     $response->setCanCDN($file->getCanCDN());
 
     $begin = null;

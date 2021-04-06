@@ -191,6 +191,9 @@ final class PhabricatorRemarkupControl extends AphrontFormTextAreaControl {
       'fa-cloud-upload' => array(
         'tip' => pht('Upload File'),
       ),
+      'fa-edit' => array(
+        'tip' => pht('Insert Flowchart'),
+      ),
     );
 
     $can_use_macros =
@@ -270,6 +273,10 @@ final class PhabricatorRemarkupControl extends AphrontFormTextAreaControl {
       }
 
       if ($action == 'fa-cloud-upload') {
+        $classes[] = 'remarkup-assist-upload';
+      }
+
+      if ($action == 'fa-edit') {
         $classes[] = 'remarkup-assist-upload';
       }
 
