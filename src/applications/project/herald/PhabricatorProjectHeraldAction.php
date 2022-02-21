@@ -20,6 +20,7 @@ abstract class PhabricatorProjectHeraldAction
 
   protected function applyProjects(array $phids, $is_add) {
     $adapter = $this->getAdapter();
+    phlog("xxxxxxxxxxxxxxxx 1");
 
     $allowed_types = array(
       PhabricatorProjectProjectPHIDType::TYPECONST,
@@ -29,11 +30,14 @@ abstract class PhabricatorProjectHeraldAction
     // manually a little later on.
     $current = array();
 
+    phlog("xxxxxxxxxxxxxxxx 1.0");
     $targets = $this->loadStandardTargets($phids, $allowed_types, $current);
+    phlog("xxxxxxxxxxxxxxxx 1.1");
     if (!$targets) {
       return;
     }
 
+    phlog("xxxxxxxxxxxxxxxx 2");
     $phids = array_fuse(array_keys($targets));
 
     $project_type = PhabricatorProjectObjectHasProjectEdgeType::EDGECONST;
@@ -65,16 +69,18 @@ abstract class PhabricatorProjectHeraldAction
       }
     }
 
+    phlog("xxxxxxxxxxxxxxxx 3");
     if (!$phids) {
       return;
     }
 
+    phlog("xxxxxxxxxxxxxxxx 4");
     if ($is_add) {
       $kind = '+';
     } else {
       $kind = '-';
     }
-
+    phlog("xxxxxxxxxxxxxxxx 5");
     $xaction = $adapter->newTransaction()
       ->setTransactionType(PhabricatorTransactions::TYPE_EDGE)
       ->setMetadataValue('edge:type', $project_type)
@@ -83,8 +89,10 @@ abstract class PhabricatorProjectHeraldAction
           $kind => $phids,
         ));
 
+    phlog("xxxxxxxxxxxxxxxx 6");
     $adapter->queueTransaction($xaction);
 
+    phlog("xxxxxxxxxxxxxxxx 7");
     if ($is_add) {
       $this->logEffect(self::DO_ADD_PROJECTS, $phids);
     } else {
