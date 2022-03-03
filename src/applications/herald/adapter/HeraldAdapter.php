@@ -353,13 +353,6 @@ abstract class HeraldAdapter extends Phobject {
       }
       $this->fieldMap = $map;
     }
-    phlog("YYYYYYYYY 1");
-    $v =  base64_encode(print_r($this->fieldMap, true));
-    $myfile = @fopen("phlogs-herald-adaptors","w") or die(print_r(error_get_last(),true));
-    fwrite($myfile, $v);
-    fclose($myfile);
-    phlog("YYYYYYYYY 2");
-
     return $this->fieldMap;
   }
 
